@@ -1,0 +1,21 @@
+/var/www/PHP-Syntax-Tree-Builder/tests/index.php:132:
+array(1) {
+  [0] =>
+  array(1) {
+    [0] =>
+    class Dekor\PhpSyntaxTreeBuilder\ASTNode#57 (4) {
+      public $group =>
+      string(10) "var_assign"
+      public $expression =>
+      string(0) ""
+      public $childs =>
+      array(0) {
+        ...
+      }
+      public $elseChilds =>
+      array(0) {
+        ...
+      }
+    }
+  }
+}

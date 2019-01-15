@@ -1,0 +1,16 @@
+{
+    "name": "dekor/php-syntax-tree-builder",
+    "description": "This library allows you to build your custom language by describing lexing/parsing rules.",
+    "authors": [
+        {
+            "name": "Denis Koronets",
+            "email": "denis.koronets@devicepros.net"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Dekor\\PhpSyntaxTreeBuilder\\": "src/"
+        }
+    }
+}
