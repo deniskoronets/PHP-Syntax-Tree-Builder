@@ -42,14 +42,12 @@ class Parser
      */
     public function group($groupName, LexemsRewindMachine $rewind, $nesting = 0)
     {
-        $astSequence = [];
-
         if (!isset($this->groups[$groupName])) {
-            throw new \Exception('Group ' . $groupName . ' doesnt exist. Check your parser config');
+            throw new GrammaryException('Group ' . $groupName . ' doesn\'t exist. Check your parser config');
         }
 
         if ($rewind->ended()) {
-            return $astSequence;
+            throw new ParserSequenceUnmatchedException('Lexemes has ended', null);
         }
 
         $group = $this->groups[$groupName];
@@ -70,25 +68,27 @@ class Parser
                 }
 
                 try {
-                    $astSequence[] = $this->group($allowedGroup, $rewind, $nesting + 1);
+                    return $this->group($allowedGroup, $rewind, $nesting + 1);
 
                 } catch (ParserSequenceUnmatchedException $exception) {
+                    // @todo: check the case when some of group (non-last) started parsing, but thrown an exception
                     $lastException = $exception;
-                }
-
-                if ($lastException === null) {
-                    return $astSequence;
                 }
             }
 
-            throw new $lastException;
+            throw $lastException;
         }
 
         if (isset($group['sequence'])) {
 
             $rewind->transaction();
 
-            $accumulated = [];
+            $accumulated = [
+                'grouped' => [],
+                'series' => [],
+            ];
+
+            $lexems = [];
 
             foreach ($group['sequence'] as $index => $element) {
 
@@ -96,7 +96,7 @@ class Parser
 
                 if (mb_substr($element, 0, 1, 'UTF-8') == '?') {
                     $optional = true;
-                    $element = mb_substr($element, 1);
+                    $element = mb_substr($element, 1, null, 'UTF-8');
                 }
 
                 /**
@@ -105,28 +105,36 @@ class Parser
                 if (isset($this->groups[$element])) {
 
                     try {
-                        $accumulated = $this->group($element, $rewind, $nesting + 1);
+                        $accumulated['grouped'][$element] =
+                        $accumulated['series'][] = $this->group($element, $rewind, $nesting + 1);
 
                     } catch (ParserSequenceUnmatchedOnFirstElementException $e) {
+
+                        /**
+                         * When subgroup is optional and parsing failed on the first lexem
+                         */
                         if ($optional) {
+                            $accumulated['grouped'][$element] =
+                            $accumulated['series'][] = null;
                             continue;
                         }
 
                         throw $e;
                     }
+
                     continue;
                 }
 
-                $lexem = $rewind->current();
+                $lexem = $lexems[] = $rewind->current();
 
                 if ($element != $lexem->name) {
 
-                    $message = 'Unexpected ' . $lexem->name . ', expected ' . $element;
+                    $message = 'Unexpected ' . $lexem->name . ', expected ' . $element . ' at line: ' . $lexem->line;
 
                     if ($index == 0) {
-                        throw new ParserSequenceUnmatchedOnFirstElementException($message);
+                        throw new ParserSequenceUnmatchedOnFirstElementException($message, $lexem);
                     } else {
-                        throw new ParserSequenceUnmatchedException($message);
+                        throw new ParserSequenceUnmatchedException($message, $lexem);
                     }
                 }
 
@@ -135,11 +143,20 @@ class Parser
 
             $rewind->commit();
 
-            if (!isset($group['callback'])) {
-                throw new GrammaryException('Undefined callback in some group where sequence is represented');
+            if (!empty($group['callback'])) {
+
+                if (!is_callable($group['callback'])) {
+                    throw new GrammaryException('Sequence callback for group ' . $groupName . ' is not callable');
+                }
+
+                return $group['callback']($lexems, $accumulated['series']);
             }
 
-            return $astSequence[] = $group['callback']($accumulated);
+            return new ASTNode(
+                $groupName,
+                $accumulated['grouped'],
+                $lexems
+            );
         }
 
         throw new GrammaryException('Corrupted group: no OR, SEQUENCE sections were represented: ' . $groupName);
@@ -147,10 +164,10 @@ class Parser
 
     /**
      * @param Lexem[] $lexems
-     * @return ASTNode[]
+     * @return ASTNode|ASTNode[]
      * @throws \Exception
      */
-    public function parse(array $lexems) : array
+    public function parse(array $lexems)
     {
         return $this->group(
             $this->config['startFrom'],

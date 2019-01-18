@@ -1,0 +1,384 @@
+{
+    "group": "PHP",
+    "subGroups": [
+        {
+            "group": "g:statements",
+            "subGroups": {
+                "g:statement": {
+                    "group": "g:var_assign",
+                    "subGroups": {
+                        "g:expression": {
+                            "group": "g:expression",
+                            "subGroups": {
+                                "g:scalar_or_var": {
+                                    "group": "g:expression_scalar_num",
+                                    "subGroups": [],
+                                    "lexems": [
+                                        {
+                                            "name": "NUMBER",
+                                            "value": "1",
+                                            "line": 3
+                                        }
+                                    ]
+                                },
+                                "g:_expression": {
+                                    "group": "g:_expression",
+                                    "subGroups": {
+                                        "g:scalar_or_var": {
+                                            "group": "g:expression_scalar_num",
+                                            "subGroups": [],
+                                            "lexems": [
+                                                {
+                                                    "name": "NUMBER",
+                                                    "value": "3",
+                                                    "line": 3
+                                                }
+                                            ]
+                                        },
+                                        "g:_expression": null
+                                    },
+                                    "lexems": [
+                                        {
+                                            "name": "MATH_OPERATOR",
+                                            "value": "+",
+                                            "line": 3
+                                        }
+                                    ]
+                                }
+                            },
+                            "lexems": []
+                        }
+                    },
+                    "lexems": [
+                        {
+                            "name": "VAR",
+                            "value": "a",
+                            "line": 3
+                        },
+                        {
+                            "name": "=",
+                            "value": "",
+                            "line": 3
+                        },
+                        {
+                            "name": ";",
+                            "value": "",
+                            "line": 3
+                        }
+                    ]
+                },
+                "g:statements": {
+                    "group": "g:statements",
+                    "subGroups": {
+                        "g:statement": {
+                            "group": "g:var_assign",
+                            "subGroups": {
+                                "g:expression": {
+                                    "group": "g:expression",
+                                    "subGroups": {
+                                        "g:scalar_or_var": {
+                                            "group": "g:expression_scalar_num",
+                                            "subGroups": [],
+                                            "lexems": [
+                                                {
+                                                    "name": "NUMBER",
+                                                    "value": "31",
+                                                    "line": 4
+                                                }
+                                            ]
+                                        },
+                                        "g:_expression": {
+                                            "group": "g:_expression",
+                                            "subGroups": {
+                                                "g:scalar_or_var": {
+                                                    "group": "g:expression_scalar_num",
+                                                    "subGroups": [],
+                                                    "lexems": [
+                                                        {
+                                                            "name": "NUMBER",
+                                                            "value": "11",
+                                                            "line": 4
+                                                        }
+                                                    ]
+                                                },
+                                                "g:_expression": {
+                                                    "group": "g:_expression",
+                                                    "subGroups": {
+                                                        "g:scalar_or_var": {
+                                                            "group": "g:expression_scalar_num",
+                                                            "subGroups": [],
+                                                            "lexems": [
+                                                                {
+                                                                    "name": "NUMBER",
+                                                                    "value": "21",
+                                                                    "line": 4
+                                                                }
+                                                            ]
+                                                        },
+                                                        "g:_expression": {
+                                                            "group": "g:_expression",
+                                                            "subGroups": {
+                                                                "g:scalar_or_var": {
+                                                                    "group": "g:expression_scalar_num",
+                                                                    "subGroups": [],
+                                                                    "lexems": [
+                                                                        {
+                                                                            "name": "NUMBER",
+                                                                            "value": "11",
+                                                                            "line": 4
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "g:_expression": {
+                                                                    "group": "g:_expression",
+                                                                    "subGroups": {
+                                                                        "g:scalar_or_var": {
+                                                                            "group": "g:expression_scalar_num",
+                                                                            "subGroups": [],
+                                                                            "lexems": [
+                                                                                {
+                                                                                    "name": "NUMBER",
+                                                                                    "value": "25",
+                                                                                    "line": 4
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "g:_expression": null
+                                                                    },
+                                                                    "lexems": [
+                                                                        {
+                                                                            "name": "MATH_OPERATOR",
+                                                                            "value": "+",
+                                                                            "line": 4
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "lexems": [
+                                                                {
+                                                                    "name": "MATH_OPERATOR",
+                                                                    "value": "-",
+                                                                    "line": 4
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    "lexems": [
+                                                        {
+                                                            "name": "MATH_OPERATOR",
+                                                            "value": "+",
+                                                            "line": 4
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "lexems": [
+                                                {
+                                                    "name": "MATH_OPERATOR",
+                                                    "value": "+",
+                                                    "line": 4
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "lexems": []
+                                }
+                            },
+                            "lexems": [
+                                {
+                                    "name": "VAR",
+                                    "value": "b",
+                                    "line": 4
+                                },
+                                {
+                                    "name": "=",
+                                    "value": "",
+                                    "line": 4
+                                },
+                                {
+                                    "name": ";",
+                                    "value": "",
+                                    "line": 4
+                                }
+                            ]
+                        },
+                        "g:statements": {
+                            "group": "g:statements",
+                            "subGroups": {
+                                "g:statement": {
+                                    "group": "g:if",
+                                    "subGroups": {
+                                        "g:expression": {
+                                            "group": "g:expression",
+                                            "subGroups": {
+                                                "g:scalar_or_var": {
+                                                    "group": "g:expression_var_usage",
+                                                    "subGroups": [],
+                                                    "lexems": [
+                                                        {
+                                                            "name": "VAR",
+                                                            "value": "a",
+                                                            "line": 6
+                                                        }
+                                                    ]
+                                                },
+                                                "g:_expression": {
+                                                    "group": "g:_expression",
+                                                    "subGroups": {
+                                                        "g:scalar_or_var": {
+                                                            "group": "g:expression_var_usage",
+                                                            "subGroups": [],
+                                                            "lexems": [
+                                                                {
+                                                                    "name": "VAR",
+                                                                    "value": "b",
+                                                                    "line": 6
+                                                                }
+                                                            ]
+                                                        },
+                                                        "g:_expression": {
+                                                            "group": "g:_expression",
+                                                            "subGroups": {
+                                                                "g:scalar_or_var": {
+                                                                    "group": "g:expression_scalar_num",
+                                                                    "subGroups": [],
+                                                                    "lexems": [
+                                                                        {
+                                                                            "name": "NUMBER",
+                                                                            "value": "11",
+                                                                            "line": 6
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "g:_expression": null
+                                                            },
+                                                            "lexems": [
+                                                                {
+                                                                    "name": "MATH_OPERATOR",
+                                                                    "value": "-",
+                                                                    "line": 6
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    "lexems": [
+                                                        {
+                                                            "name": "MATH_OPERATOR",
+                                                            "value": "+",
+                                                            "line": 6
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "lexems": []
+                                        },
+                                        "g:statements": {
+                                            "group": "g:statements",
+                                            "subGroups": {
+                                                "g:statement": {
+                                                    "group": "g:var_assign",
+                                                    "subGroups": {
+                                                        "g:expression": {
+                                                            "group": "g:expression",
+                                                            "subGroups": {
+                                                                "g:scalar_or_var": {
+                                                                    "group": "g:expression_scalar_num",
+                                                                    "subGroups": [],
+                                                                    "lexems": [
+                                                                        {
+                                                                            "name": "NUMBER",
+                                                                            "value": "2",
+                                                                            "line": 9
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "g:_expression": null
+                                                            },
+                                                            "lexems": []
+                                                        }
+                                                    },
+                                                    "lexems": [
+                                                        {
+                                                            "name": "VAR",
+                                                            "value": "c",
+                                                            "line": 9
+                                                        },
+                                                        {
+                                                            "name": "=",
+                                                            "value": "",
+                                                            "line": 9
+                                                        },
+                                                        {
+                                                            "name": ";",
+                                                            "value": "",
+                                                            "line": 9
+                                                        }
+                                                    ]
+                                                },
+                                                "g:statements": null
+                                            },
+                                            "lexems": []
+                                        }
+                                    },
+                                    "lexems": [
+                                        {
+                                            "name": "IF",
+                                            "value": "",
+                                            "line": 6
+                                        },
+                                        {
+                                            "name": "(",
+                                            "value": "",
+                                            "line": 6
+                                        },
+                                        {
+                                            "name": ")",
+                                            "value": "",
+                                            "line": 6
+                                        },
+                                        {
+                                            "name": "{",
+                                            "value": "",
+                                            "line": 6
+                                        },
+                                        {
+                                            "name": "}",
+                                            "value": "",
+                                            "line": 8
+                                        },
+                                        {
+                                            "name": "ELSE",
+                                            "value": "",
+                                            "line": 8
+                                        },
+                                        {
+                                            "name": "{",
+                                            "value": "",
+                                            "line": 8
+                                        },
+                                        {
+                                            "name": "}",
+                                            "value": "",
+                                            "line": 10
+                                        }
+                                    ]
+                                },
+                                "g:statements": null
+                            },
+                            "lexems": []
+                        }
+                    },
+                    "lexems": []
+                }
+            },
+            "lexems": []
+        }
+    ],
+    "lexems": [
+        {
+            "name": "OPENING_PHP_TAG",
+            "value": "",
+            "line": 1
+        }
+    ]
+}

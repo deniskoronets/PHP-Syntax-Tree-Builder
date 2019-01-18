@@ -4,19 +4,25 @@ namespace Dekor\PhpSyntaxTreeBuilder;
 
 class ASTNode
 {
+    /**
+     * @var string
+     */
     public $group;
 
-    public $expression;
+    /**
+     * @var array|null
+     */
+    public $subGroups = [];
 
-    public $childs = [];
+    /**
+     * @var array
+     */
+    public $lexems = [];
 
-    public $elseChilds = [];
-
-    public function __construct(string $group, $expression, array $childs = [], array $elseChilds = [])
+    public function __construct(string $group, array $subGroups, array $lexems)
     {
         $this->group = $group;
-        $this->expression = $expression;
-        $this->childs = $childs;
-        $this->elseChilds = $elseChilds;
+        $this->subGroups = $subGroups;
+        $this->lexems = $lexems;
     }
 }

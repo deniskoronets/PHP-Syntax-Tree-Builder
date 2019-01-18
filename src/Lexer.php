@@ -13,6 +13,11 @@ class Lexer
     public $rules = [];
 
     /**
+     * @var int
+     */
+    private $line = 1;
+
+    /**
      * Lexer constructor.
      * @param array $rules
      */
@@ -31,9 +36,12 @@ class Lexer
         foreach ($this->rules as $pattern => $lexemType) {
             $matches = [];
             if (preg_match('/^' . $pattern . '/', $in, $matches)) {
+
+                $this->line += substr_count($matches[0], "\n");
+
                 return [
                     'offset' => mb_strlen($matches[0], 'UTF-8'),
-                    'lexem' => ($lexemType != '') ? new Lexem($lexemType, $matches[1] ?? '') : null,
+                    'lexem' => ($lexemType != '') ? new Lexem($lexemType, $matches[1] ?? '', $this->line) : null,
                 ];
             }
         }

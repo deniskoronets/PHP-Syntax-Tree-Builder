@@ -8,9 +8,12 @@ class Lexem
 
     public $value;
 
-    public function __construct(string $name, $value = '')
+    public $line;
+
+    public function __construct(string $name, $value, int $line)
     {
         $this->name = $name;
         $this->value = $value;
+        $this->line = $line;
     }
 }
