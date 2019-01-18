@@ -109,7 +109,7 @@ class Parser
 
                     } catch (ParserSequenceUnmatchedOnFirstElementException $e) {
                         if ($optional) {
-                            return $accumulated;
+                            continue;
                         }
 
                         throw $e;
