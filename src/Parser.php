@@ -96,7 +96,7 @@ class Parser
 
                 if (mb_substr($element, 0, 1, 'UTF-8') == '?') {
                     $optional = true;
-                    $element = mb_substr($element, 1, 'UTF-8');
+                    $element = mb_substr($element, 1);
                 }
 
                 /**
