@@ -2,7 +2,10 @@
 
 namespace Dekor\PhpSyntaxTreeBuilder;
 
+use Dekor\PhpSyntaxTreeBuilder\Exceptions\GrammaryException;
+use Dekor\PhpSyntaxTreeBuilder\Exceptions\LoopedNestingException;
 use Dekor\PhpSyntaxTreeBuilder\Exceptions\ParserSequenceUnmatchedException;
+use Dekor\PhpSyntaxTreeBuilder\Exceptions\ParserSequenceUnmatchedOnFirstElementException;
 
 class Parser
 {
@@ -30,8 +33,12 @@ class Parser
     /**
      * @param $groupName
      * @param LexemsRewindMachine $rewind
+     * @param int $nesting
      * @return ASTNode[]
+     * @throws GrammaryException
+     * @throws LoopedNestingException
      * @throws ParserSequenceUnmatchedException
+     * @throws ParserSequenceUnmatchedOnFirstElementException
      */
     public function group($groupName, LexemsRewindMachine $rewind, $nesting = 0)
     {
@@ -39,10 +46,6 @@ class Parser
 
         if (!isset($this->groups[$groupName])) {
             throw new \Exception('Group ' . $groupName . ' doesnt exist. Check your parser config');
-        }
-
-        if ($groupName == 'g:print') {
-            $c = 1;
         }
 
         if ($rewind->ended()) {
@@ -62,9 +65,8 @@ class Parser
                 /**
                  * In case of infinite nesting started
                  */
-                if ($nesting > 30) {
-                    $nesting = 0;
-                    return;
+                if ($nesting > 100) {
+                    throw new LoopedNestingException();
                 }
 
                 try {
@@ -88,20 +90,44 @@ class Parser
 
             $accumulated = [];
 
-            foreach ($group['sequence'] as $element) {
+            foreach ($group['sequence'] as $index => $element) {
+
+                $optional = false;
+
+                if (mb_substr($element, 0, 1, 'UTF-8') == '?') {
+                    $optional = true;
+                    $element = mb_substr($element, 1, 'UTF-8');
+                }
 
                 /**
                  * In case of element is group, recursively parse group
                  */
                 if (isset($this->groups[$element])) {
-                    $accumulated = $this->group($element, $rewind, $nesting + 1);
+
+                    try {
+                        $accumulated = $this->group($element, $rewind, $nesting + 1);
+
+                    } catch (ParserSequenceUnmatchedOnFirstElementException $e) {
+                        if ($optional) {
+                            return $accumulated;
+                        }
+
+                        throw $e;
+                    }
                     continue;
                 }
 
-                $lexem = $accumulated[] = $rewind->current();
+                $lexem = $rewind->current();
 
                 if ($element != $lexem->name) {
-                    throw new ParserSequenceUnmatchedException('Unexpected ' . $lexem->name . ', expected ' . $element);
+
+                    $message = 'Unexpected ' . $lexem->name . ', expected ' . $element;
+
+                    if ($index == 0) {
+                        throw new ParserSequenceUnmatchedOnFirstElementException($message);
+                    } else {
+                        throw new ParserSequenceUnmatchedException($message);
+                    }
                 }
 
                 $rewind->next();
@@ -110,13 +136,13 @@ class Parser
             $rewind->commit();
 
             if (!isset($group['callback'])) {
-                throw new \Exception('Undefined callback in some group where sequence is represented');
+                throw new GrammaryException('Undefined callback in some group where sequence is represented');
             }
 
             return $astSequence[] = $group['callback']($accumulated);
         }
 
-        throw new \Exception('Corrupted group: no OR, SEQUENCE sections were represented: ' . $groupName);
+        throw new GrammaryException('Corrupted group: no OR, SEQUENCE sections were represented: ' . $groupName);
     }
 
     /**

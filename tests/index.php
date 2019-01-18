@@ -26,10 +26,10 @@ $lexer = new \Dekor\PhpSyntaxTreeBuilder\Lexer([
 
 $lexems = $lexer->parse('
 
-    $a = 1; 
-    $b = (31 + 11 + 21 - (11 + 25));
+    $a = 1 + 3; 
+    $b = 31 + 11 + 21 - 11 + 25;
     
-    if (($a + $b - 11) > 10) {
+    if ($a + $b - 11 > 10) {
         $c = 1;
     } else {
         $c = 2;
@@ -52,7 +52,7 @@ $parser = new \Dekor\PhpSyntaxTreeBuilder\Parser([
         'callback' => function($elements) {
             return new \Dekor\PhpSyntaxTreeBuilder\ASTNode(
                 'statements',
-                $elements[0]->name
+                null
             );
         }
     ],
@@ -66,11 +66,23 @@ $parser = new \Dekor\PhpSyntaxTreeBuilder\Parser([
         'sequence' => [
             'PRINT', 'g:expression', ';'
         ],
+        'callback' => function($elements) {
+            return new \Dekor\PhpSyntaxTreeBuilder\ASTNode(
+                'statements',
+                null
+            );
+        }
     ],
     'g:if' => [
         'sequence' => [
             'IF', '(', 'g:expression', ')', '{', 'g:statements', '}', 'ELSE', '{', 'g:statements', '}',
         ],
+        'callback' => function($elements) {
+            return new \Dekor\PhpSyntaxTreeBuilder\ASTNode(
+                'statements',
+                null
+            );
+        }
     ],
     'g:var_assign' => [
         'sequence' => [
@@ -79,58 +91,81 @@ $parser = new \Dekor\PhpSyntaxTreeBuilder\Parser([
         'callback' => function($elements) {
             return new \Dekor\PhpSyntaxTreeBuilder\ASTNode(
                 'var_assign',
-                $elements[1]->value
+                null
             );
         }
     ],
-    'g:expression' => [
+    'g:scalar_or_var' => [
         'or' => [
             'g:expression_var_usage',
             'g:expression_scalar_num',
             'g:expression_scalar_string',
-
-            'g:expression_sum',
-            'g:expression_diff',
-            'g:expression_mul',
-            'g:expression_div',
-            'g:expression_brackets',
         ],
     ],
-    'g:expression_sum' => [
-        'sequence' => ['g:expression', '+', 'g:expression'],
+    'g:expression' => [
+        'sequence' => [
+            'g:scalar_or_var',
+            'g:_expression',
+        ],
+        'finishWhenChildParsingUnmatches' => 'g:_expression',
         'callback' => function($elements) {
             return new \Dekor\PhpSyntaxTreeBuilder\ASTNode(
-                'sum',
-                null //$elements[1]->value
+                'statements',
+                null
             );
-        },
+        }
     ],
-    'g:expression_diff' => [
-        'sequence' => ['g:expression', '-', 'g:expression'],
+    'g:_expression' => [
+        'sequence' => [
+            'g:math_operator',
+            'g:scalar_or_var',
+            '?g:_expression',
+        ],
         'callback' => function($elements) {
             return new \Dekor\PhpSyntaxTreeBuilder\ASTNode(
-                'diff',
-                null //$elements[1]->value
+                'statements',
+                null
             );
-        },
+        }
     ],
-    'g:expression_mul' => [
-        'sequence' => ['g:expression', '*', 'g:expression'],
-        'callback' => function($elements) {
-            return new \Dekor\PhpSyntaxTreeBuilder\ASTNode(
-                'mul',
-                null //$elements[1]->value
-            );
-        },
+    'g:math_operator' => [
+        'or' => ['g:math_+', 'g:math_-', 'g:math_*', 'g:math_/'],
     ],
-    'g:expression_div' => [
-        'sequence' => ['g:expression', '/', 'g:expression'],
+    'g:math_+' => [
+        'sequence' => ['+'],
         'callback' => function($elements) {
             return new \Dekor\PhpSyntaxTreeBuilder\ASTNode(
-                'div',
-                null //$elements[1]->value
+                'statements',
+                null
             );
-        },
+        }
+    ],
+    'g:math_-' => [
+        'sequence' => ['-'],
+        'callback' => function($elements) {
+            return new \Dekor\PhpSyntaxTreeBuilder\ASTNode(
+                'statements',
+                null
+            );
+        }
+    ],
+    'g:math_*' => [
+        'sequence' => ['*'],
+        'callback' => function($elements) {
+            return new \Dekor\PhpSyntaxTreeBuilder\ASTNode(
+                'statements',
+                null
+            );
+        }
+    ],
+    'g:math_/' => [
+        'sequence' => ['/'],
+        'callback' => function($elements) {
+            return new \Dekor\PhpSyntaxTreeBuilder\ASTNode(
+                'statements',
+                null
+            );
+        }
     ],
     'g:expression_brackets' => [
         'sequence' => ['(', 'g:expression', ')'],
@@ -146,7 +181,7 @@ $parser = new \Dekor\PhpSyntaxTreeBuilder\Parser([
         'callback' => function($elements) {
             return new \Dekor\PhpSyntaxTreeBuilder\ASTNode(
                 'var_usage',
-                $elements[1]->value
+                null
             );
         },
     ],
@@ -155,7 +190,7 @@ $parser = new \Dekor\PhpSyntaxTreeBuilder\Parser([
         'callback' => function($elements) {
             return new \Dekor\PhpSyntaxTreeBuilder\ASTNode(
                 'scalar_number',
-                $elements[0]->value
+                null
             );
         },
     ],
@@ -164,7 +199,7 @@ $parser = new \Dekor\PhpSyntaxTreeBuilder\Parser([
         'callback' => function($elements) {
             return new \Dekor\PhpSyntaxTreeBuilder\ASTNode(
                 'scalar_string',
-                $elements[0]->value
+                null
             );
         },
     ],
