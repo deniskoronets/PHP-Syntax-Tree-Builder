@@ -1,0 +1,8 @@
+{
+  "test": {
+    "test2": "testvalue",
+    "another_test": [
+      1, 1, 2, 3, "scalar"
+    ]
+  }
+}

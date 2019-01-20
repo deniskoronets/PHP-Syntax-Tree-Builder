@@ -20,6 +20,12 @@ class Parser
     public $groups = [];
 
     /**
+     * Debug stack for the latest parsing
+     * @var array
+     */
+    public $stack = [];
+
+    /**
      * Parser constructor.
      * @param array $config
      * @param array $groups
@@ -31,10 +37,18 @@ class Parser
     }
 
     /**
+     * @return array
+     */
+    public function getLatestParseStack() : array
+    {
+        return $this->stack;
+    }
+
+    /**
      * @param $groupName
      * @param LexemsRewindMachine $rewind
      * @param int $nesting
-     * @return ASTNode[]
+     * @return ASTNode
      * @throws GrammaryException
      * @throws LoopedNestingException
      * @throws ParserSequenceUnmatchedException
@@ -45,6 +59,11 @@ class Parser
         if (!isset($this->groups[$groupName])) {
             throw new GrammaryException('Group ' . $groupName . ' doesn\'t exist. Check your parser config');
         }
+
+        $this->stack[] = [
+            'group' => $groupName,
+            'rewindPosition' => [$rewind->current()->name, $rewind->current()->value],
+        ];
 
         if ($rewind->ended()) {
             throw new ParserSequenceUnmatchedException('Lexemes has ended', null);

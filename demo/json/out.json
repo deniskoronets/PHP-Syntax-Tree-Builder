@@ -1,0 +1,261 @@
+{
+    "group": "g:object",
+    "subGroups": {
+        "g:properties": {
+            "group": "g:properties",
+            "subGroups": {
+                "g:scalar_or_object": {
+                    "group": "g:object",
+                    "subGroups": {
+                        "g:properties": {
+                            "group": "g:properties",
+                            "subGroups": {
+                                "g:scalar_or_object": {
+                                    "group": "g:scalar",
+                                    "subGroups": [],
+                                    "lexems": [
+                                        {
+                                            "name": "SCALAR",
+                                            "value": "\"testvalue\"",
+                                            "line": 3
+                                        }
+                                    ]
+                                },
+                                "g:_properties": {
+                                    "group": "g:_properties",
+                                    "subGroups": {
+                                        "g:properties": {
+                                            "group": "g:properties",
+                                            "subGroups": {
+                                                "g:scalar_or_object": {
+                                                    "group": "g:array",
+                                                    "subGroups": {
+                                                        "g:array_element": {
+                                                            "group": "g:array_element",
+                                                            "subGroups": {
+                                                                "g:scalar_or_object": {
+                                                                    "group": "g:scalar",
+                                                                    "subGroups": [],
+                                                                    "lexems": [
+                                                                        {
+                                                                            "name": "SCALAR",
+                                                                            "value": "1",
+                                                                            "line": 5
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "g:_array_element": {
+                                                                    "group": "g:_array_element",
+                                                                    "subGroups": {
+                                                                        "g:array_element": {
+                                                                            "group": "g:array_element",
+                                                                            "subGroups": {
+                                                                                "g:scalar_or_object": {
+                                                                                    "group": "g:scalar",
+                                                                                    "subGroups": [],
+                                                                                    "lexems": [
+                                                                                        {
+                                                                                            "name": "SCALAR",
+                                                                                            "value": "1",
+                                                                                            "line": 5
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                "g:_array_element": {
+                                                                                    "group": "g:_array_element",
+                                                                                    "subGroups": {
+                                                                                        "g:array_element": {
+                                                                                            "group": "g:array_element",
+                                                                                            "subGroups": {
+                                                                                                "g:scalar_or_object": {
+                                                                                                    "group": "g:scalar",
+                                                                                                    "subGroups": [],
+                                                                                                    "lexems": [
+                                                                                                        {
+                                                                                                            "name": "SCALAR",
+                                                                                                            "value": "2",
+                                                                                                            "line": 5
+                                                                                                        }
+                                                                                                    ]
+                                                                                                },
+                                                                                                "g:_array_element": {
+                                                                                                    "group": "g:_array_element",
+                                                                                                    "subGroups": {
+                                                                                                        "g:array_element": {
+                                                                                                            "group": "g:array_element",
+                                                                                                            "subGroups": {
+                                                                                                                "g:scalar_or_object": {
+                                                                                                                    "group": "g:scalar",
+                                                                                                                    "subGroups": [],
+                                                                                                                    "lexems": [
+                                                                                                                        {
+                                                                                                                            "name": "SCALAR",
+                                                                                                                            "value": "3",
+                                                                                                                            "line": 5
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                },
+                                                                                                                "g:_array_element": {
+                                                                                                                    "group": "g:_array_element",
+                                                                                                                    "subGroups": {
+                                                                                                                        "g:array_element": {
+                                                                                                                            "group": "g:array_element",
+                                                                                                                            "subGroups": {
+                                                                                                                                "g:scalar_or_object": {
+                                                                                                                                    "group": "g:scalar",
+                                                                                                                                    "subGroups": [],
+                                                                                                                                    "lexems": [
+                                                                                                                                        {
+                                                                                                                                            "name": "SCALAR",
+                                                                                                                                            "value": "\"scalar\"",
+                                                                                                                                            "line": 5
+                                                                                                                                        }
+                                                                                                                                    ]
+                                                                                                                                },
+                                                                                                                                "g:_array_element": null
+                                                                                                                            },
+                                                                                                                            "lexems": []
+                                                                                                                        }
+                                                                                                                    },
+                                                                                                                    "lexems": [
+                                                                                                                        {
+                                                                                                                            "name": ",",
+                                                                                                                            "value": "",
+                                                                                                                            "line": 5
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "lexems": []
+                                                                                                        }
+                                                                                                    },
+                                                                                                    "lexems": [
+                                                                                                        {
+                                                                                                            "name": ",",
+                                                                                                            "value": "",
+                                                                                                            "line": 5
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            },
+                                                                                            "lexems": []
+                                                                                        }
+                                                                                    },
+                                                                                    "lexems": [
+                                                                                        {
+                                                                                            "name": ",",
+                                                                                            "value": "",
+                                                                                            "line": 5
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            },
+                                                                            "lexems": []
+                                                                        }
+                                                                    },
+                                                                    "lexems": [
+                                                                        {
+                                                                            "name": ",",
+                                                                            "value": "",
+                                                                            "line": 5
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "lexems": []
+                                                        }
+                                                    },
+                                                    "lexems": [
+                                                        {
+                                                            "name": "[",
+                                                            "value": "",
+                                                            "line": 4
+                                                        },
+                                                        {
+                                                            "name": "]",
+                                                            "value": "",
+                                                            "line": 6
+                                                        }
+                                                    ]
+                                                },
+                                                "g:_properties": null
+                                            },
+                                            "lexems": [
+                                                {
+                                                    "name": "SCALAR",
+                                                    "value": "\"another_test\"",
+                                                    "line": 4
+                                                },
+                                                {
+                                                    "name": ":",
+                                                    "value": "",
+                                                    "line": 4
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "lexems": [
+                                        {
+                                            "name": ",",
+                                            "value": "",
+                                            "line": 3
+                                        }
+                                    ]
+                                }
+                            },
+                            "lexems": [
+                                {
+                                    "name": "SCALAR",
+                                    "value": "\"test2\"",
+                                    "line": 3
+                                },
+                                {
+                                    "name": ":",
+                                    "value": "",
+                                    "line": 3
+                                }
+                            ]
+                        }
+                    },
+                    "lexems": [
+                        {
+                            "name": "{",
+                            "value": "",
+                            "line": 2
+                        },
+                        {
+                            "name": "}",
+                            "value": "",
+                            "line": 7
+                        }
+                    ]
+                },
+                "g:_properties": null
+            },
+            "lexems": [
+                {
+                    "name": "SCALAR",
+                    "value": "\"test\"",
+                    "line": 2
+                },
+                {
+                    "name": ":",
+                    "value": "",
+                    "line": 2
+                }
+            ]
+        }
+    },
+    "lexems": [
+        {
+            "name": "{",
+            "value": "",
+            "line": 1
+        },
+        {
+            "name": "}",
+            "value": "",
+            "line": 8
+        }
+    ]
+}

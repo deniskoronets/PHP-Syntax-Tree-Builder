@@ -41,7 +41,7 @@ class LexemsRewindMachine
      */
     public function ended() : bool
     {
-        return $this->count <= ($this->pointer + 1);
+        return $this->count < ($this->pointer + 1);
     }
 
     /**
@@ -75,7 +75,7 @@ class LexemsRewindMachine
      */
     public function next()
     {
-        return $this->lexems[++$this->pointer];
+        return $this->lexems[++$this->pointer] ?? null;
     }
 
     /**
