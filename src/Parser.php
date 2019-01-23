@@ -60,14 +60,14 @@ class Parser
             throw new GrammarException('Group ' . $groupName . ' doesn\'t exist. Check your parser config');
         }
 
+        if ($rewind->ended()) {
+            throw new ParserSequenceUnmatchedOnFirstElementException('Lexemes has ended', null);
+        }
+
         $this->stack[] = [
             'group' => $groupName,
             'rewindPosition' => [$rewind->current()->name, $rewind->current()->value],
         ];
-
-        if ($rewind->ended()) {
-            throw new ParserSequenceUnmatchedException('Lexemes has ended', null);
-        }
 
         $group = $this->groups[$groupName];
 
