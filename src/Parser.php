@@ -2,7 +2,7 @@
 
 namespace Dekor\PhpSyntaxTreeBuilder;
 
-use Dekor\PhpSyntaxTreeBuilder\Exceptions\GrammaryException;
+use Dekor\PhpSyntaxTreeBuilder\Exceptions\GrammarException;
 use Dekor\PhpSyntaxTreeBuilder\Exceptions\LoopedNestingException;
 use Dekor\PhpSyntaxTreeBuilder\Exceptions\ParserSequenceUnmatchedException;
 use Dekor\PhpSyntaxTreeBuilder\Exceptions\ParserSequenceUnmatchedOnFirstElementException;
@@ -49,7 +49,7 @@ class Parser
      * @param LexemsRewindMachine $rewind
      * @param int $nesting
      * @return ASTNode
-     * @throws GrammaryException
+     * @throws GrammarException
      * @throws LoopedNestingException
      * @throws ParserSequenceUnmatchedException
      * @throws ParserSequenceUnmatchedOnFirstElementException
@@ -57,7 +57,7 @@ class Parser
     public function group($groupName, LexemsRewindMachine $rewind, $nesting = 0)
     {
         if (!isset($this->groups[$groupName])) {
-            throw new GrammaryException('Group ' . $groupName . ' doesn\'t exist. Check your parser config');
+            throw new GrammarException('Group ' . $groupName . ' doesn\'t exist. Check your parser config');
         }
 
         $this->stack[] = [
@@ -165,7 +165,7 @@ class Parser
             if (!empty($group['callback'])) {
 
                 if (!is_callable($group['callback'])) {
-                    throw new GrammaryException('Sequence callback for group ' . $groupName . ' is not callable');
+                    throw new GrammarException('Sequence callback for group ' . $groupName . ' is not callable');
                 }
 
                 return $group['callback']($lexems, $accumulated['series']);
@@ -178,7 +178,7 @@ class Parser
             );
         }
 
-        throw new GrammaryException('Corrupted group: no OR, SEQUENCE sections were represented: ' . $groupName);
+        throw new GrammarException('Corrupted group: no OR, SEQUENCE sections were represented: ' . $groupName);
     }
 
     /**
