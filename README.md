@@ -172,3 +172,5 @@ it's `g:statements`. `$lexems` here is a simple list of lexems which were parsed
 
 ## Have any ideas/need assistance?
 You can contact me by email: CONCAT("denis", "koronets", "@", "woo.zp.ua") // sorry for obfuscation, some kind of spam protection :)
+
+(developed by: <a href="https://mobicard.com.ua/">mobicard</a>, <a href="https://busyb.com.ua/">busyb</a>)
